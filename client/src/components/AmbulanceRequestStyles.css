@@ -1,0 +1,91 @@
+.ambulance-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .ambulance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .ambulance-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+  }
+  
+  .ambulance-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input[type='text'],
+  input[type='tel'],
+  textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  textarea {
+    min-height: 80px;
+  }
+  
+  .request-button {
+    background-color: #d9534f; /* Red for emergency */
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .request-button:hover {
+    background-color: #c9302c;
+  }
+  .map-placeholder {
+    background-color: #f0f8ff; /* Light blue */
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 50px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #777;
+    cursor: pointer;
+  }
+  
+  .map-placeholder:hover {
+    background-color: #e0f2f7;
+  }

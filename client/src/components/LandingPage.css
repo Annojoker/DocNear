@@ -1,0 +1,50 @@
+.landing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5; /* A light background */
+  }
+  
+  .hero-section {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    color: #1877f2; /* Facebook blue - a common medical app color */
+    margin-bottom: 20px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .patient-button,
+  .doctor-button {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .patient-button {
+    background-color: #4CAF50; /* Green for patient */
+  }
+  
+  .doctor-button {
+    background-color: #008CBA; /* Blue for doctor */
+  }
+  
+  .patient-button:hover {
+    background-color: #45a049;
+  }
+  
+  .doctor-button:hover {
+    background-color: #0077b3;
+  }

@@ -1,0 +1,96 @@
+.book-appointment-container {
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .book-appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .book-appointment-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+  }
+  
+  .doctor-info-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .doctor-info-section h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .doctor-info-section .specialty,
+  .doctor-info-section .location {
+    color: #777;
+    font-size: 0.9em;
+    margin-bottom: 3px;
+  }
+  
+  .book-appointment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input[type='date'],
+  input[type='time'],
+  textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  textarea {
+    min-height: 80px;
+  }
+  
+  .book-button {
+    background-color: #00c853; /* Green for booking */
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .book-button:hover {
+    background-color: #00a34a;
+  }

@@ -1,0 +1,40 @@
+.map-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: sans-serif;
+  }
+  
+  .map-header {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .map-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+  }
+  
+  .map-area {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6f7ff; /* Light blue for map area */
+    font-size: 1.1em;
+    color: #777;
+  }

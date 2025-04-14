@@ -1,0 +1,102 @@
+.doctor-list-container {
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .doctor-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+  }
+  
+  .doctors-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .doctor-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+  }
+  
+  .doctor-info h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .doctor-info .specialty {
+    color: #777;
+    font-size: 0.9em;
+  }
+  
+  .doctor-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chat-button,
+  .video-button {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .chat-button {
+    background-color: #008CBA; /* Blue */
+  }
+  
+  .video-button {
+    background-color: #4CAF50; /* Green */
+  }
+  
+  .chat-button:hover {
+    background-color: #0077b3;
+  }
+  
+  .video-button:hover {
+    background-color: #45a049;
+  }
+  .book-button {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    background-color: #00c853; /* A nice green for booking */
+  }
+  
+  .book-button:hover {
+    background-color: #00a34a;
+  }
+  
+  .doctor-info .location {
+    color: #555;
+    font-size: 0.85em;
+    margin-bottom: 5px;
+  }

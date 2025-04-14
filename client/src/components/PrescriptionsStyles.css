@@ -1,0 +1,54 @@
+.prescriptions-container {
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .prescriptions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .prescriptions-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+  }
+  
+  .prescriptions-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .prescription-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+  }
+  
+  .prescription-card h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1.1em;
+  }
+  
+  .prescription-card p {
+    color: #777;
+    font-size: 0.9em;
+    margin-bottom: 3px;
+  }
