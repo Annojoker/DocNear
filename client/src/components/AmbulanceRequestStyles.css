@@ -1,91 +1,146 @@
+/* Further adjustments for more horizontal layout on Ambulance Request */
 .ambulance-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  
-  .ambulance-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-  
-  .ambulance-header h2 {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .back-button {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .ambulance-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0F7FA;
+  background-color: #19234B;
+  min-height: 80vh;
+}
+
+.ambulance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #3F51B5;
+  padding-bottom: 15px;
+}
+
+.ambulance-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #81d4fa;
+}
+
+.back-button {
+  color: #B3E5FC;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #E0F7FA;
+}
+
+.ambulance-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px; /* Slightly wider form */
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #25359A;
+  border-radius: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row; /* Keep horizontal arrangement as default */
+  align-items: center; /* Vertically align label and input */
+  gap: 15px; /* Spacing between label and input */
+}
+
+label {
+  flex-basis: 35%; /* Slightly wider label area */
+  text-align: left;
+  font-weight: bold;
+  color: #E0F7FA;
+  font-size: 1.1em;
+}
+
+input[type='text'],
+input[type='tel'] {
+  flex-grow: 1; /* Allow input to take up remaining space */
+  padding: 12px;
+  border: 1px solid #3F51B5;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #E0F7FA;
+}
+
+textarea {
+  width: 100%; /* Make textarea full width within its form-group */
+  padding: 12px;
+  border: 1px solid #3F51B5;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #E0F7FA;
+  min-height: 100px;
+}
+
+/* Special handling for textarea to make label appear above */
+.form-group:has(textarea) {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group:has(textarea) label {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.request-button {
+  background-color: #D32F2F;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+}
+
+.request-button:hover {
+  background-color: #B71C1C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.map-placeholder {
+  background-color: #19234B;
+  border: 2px dashed #3F51B5;
+  border-radius: 8px;
+  padding: 60px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #B3E5FC;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.map-placeholder:hover {
+  background-color: #25359A;
+  opacity: 0.9;
+}
+
+/* Adjust the breakpoint for vertical stacking to a smaller width */
+@media (max-width: 450px) {
   .form-group {
-    display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack label and input vertically on very small screens */
+    align-items: flex-start;
   }
-  
+
   label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 8px;
   }
-  
-  input[type='text'],
-  input[type='tel'],
-  textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  textarea {
-    min-height: 80px;
-  }
-  
-  .request-button {
-    background-color: #d9534f; /* Red for emergency */
-    color: white;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .request-button:hover {
-    background-color: #c9302c;
-  }
-  .map-placeholder {
-    background-color: #f0f8ff; /* Light blue */
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    padding: 50px;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #777;
-    cursor: pointer;
-  }
-  
-  .map-placeholder:hover {
-    background-color: #e0f2f7;
-  }
+}

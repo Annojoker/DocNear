@@ -1,40 +1,50 @@
+/* Dark Blue Theme for Hospitals Map */
 .map-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    font-family: sans-serif;
-  }
-  
-  .map-header {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .map-header h2 {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .back-button {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .map-area {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e6f7ff; /* Light blue for map area */
-    font-size: 1.1em;
-    color: #777;
-  }
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0F7FA;
+  background-color: #19234B;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3F51B5;
+}
+
+.map-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #81d4fa;
+}
+
+.back-button {
+  color: #B3E5FC;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #E0F7FA;
+}
+
+.map-area {
+  background-color: #25359A;
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #B3E5FC;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* If you anticipate loading a map library that might have its own styling,
+   you might need to add more specific rules here to ensure it integrates well
+   with your dark blue theme. For example, adjusting marker colors, info windows, etc. */

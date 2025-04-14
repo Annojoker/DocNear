@@ -1,96 +1,121 @@
+/* Dark Blue Theme for Book Appointment */
 .book-appointment-container {
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  
-  .book-appointment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-  
-  .book-appointment-header h2 {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .back-button {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .doctor-info-section {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .doctor-info-section h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  .doctor-info-section .specialty,
-  .doctor-info-section .location {
-    color: #777;
-    font-size: 0.9em;
-    margin-bottom: 3px;
-  }
-  
-  .book-appointment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  input[type='date'],
-  input[type='time'],
-  textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  textarea {
-    min-height: 80px;
-  }
-  
-  .book-button {
-    background-color: #00c853; /* Green for booking */
-    color: white;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .book-button:hover {
-    background-color: #00a34a;
-  }
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0F7FA;
+  background-color: #19234B;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+}
+
+.book-appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3F51B5;
+  width: 100%;
+  max-width: 600px; /* Limit header width */
+}
+
+.book-appointment-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #81d4fa;
+}
+
+.back-button {
+  color: #B3E5FC;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #E0F7FA;
+}
+
+.doctor-info-section {
+  background-color: #25359A;
+  color: #B3E5FC;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-info-section h3 {
+  margin-top: 0;
+  font-size: 1.3em;
+  color: #00BCD4; /* Cyan for doctor's name */
+  margin-bottom: 5px;
+}
+
+.doctor-info-section .specialty,
+.doctor-info-section .location {
+  font-size: 0.95em;
+  margin-bottom: 3px;
+}
+
+.book-appointment-form {
+  background-color: #25359A;
+  padding: 25px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #E0F7FA;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.form-group input[type='date'],
+.form-group input[type='time'],
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #3F51B5;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #E0F7FA;
+}
+
+.form-group textarea {
+  min-height: 100px;
+}
+
+.book-button {
+  background-color: #00BCD4;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+}
+
+.book-button:hover {
+  background-color: #26C6DA;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

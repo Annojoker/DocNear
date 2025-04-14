@@ -1,50 +1,234 @@
-.landing-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5; /* A light background */
-  }
-  
-  .hero-section {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  h1 {
-    font-size: 2.5em;
-    color: #1877f2; /* Facebook blue - a common medical app color */
-    margin-bottom: 20px;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .patient-button,
-  .doctor-button {
-    display: inline-block;
-    padding: 12px 24px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .patient-button {
-    background-color: #4CAF50; /* Green for patient */
-  }
-  
-  .doctor-button {
-    background-color: #008CBA; /* Blue for doctor */
-  }
-  
-  .patient-button:hover {
-    background-color: #45a049;
-  }
-  
-  .doctor-button:hover {
-    background-color: #0077b3;
-  }
+/* Dark Blue Theme for Landing Page */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  color: #E0F7FA; /* Very light blue text for contrast */
+  margin: 0;
+  padding: 0;
+  background-color: #0C1234; /* Very dark blue background */
+}
+
+.landing-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.landing-page-header {
+  background-color: rgba(25, 35, 75, 0.8); /* Semi-transparent dark blue */
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3F51B5; /* Slightly lighter dark blue border */
+}
+
+.landing-page-header h1 {
+  margin: 0;
+  color: #81d4fa; /* Bright light blue logo text */
+}
+
+.landing-page-header nav a {
+  color: #B3E5FC; /* Light blue navigation links */
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.landing-page-header nav a:hover {
+  text-decoration: underline;
+  color: #E0F7FA; /* Slightly brighter on hover */
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to bottom, #19234B, #25359A); /* Dark blue gradient */
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+}
+
+.hero-content {
+  max-width: 550px;
+  text-align: left;
+}
+
+.hero-content h1 {
+  font-size: 3em;
+  color: #81d4fa; /* Bright light blue hero title */
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.2em;
+  color: #E0F7FA;
+  margin-bottom: 30px;
+}
+
+.hero-buttons a {
+  display: inline-block;
+  padding: 15px 30px;
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  margin-right: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.hero-buttons .patient-button {
+  background-color: #00BCD4; /* Cyan button */
+}
+
+.hero-buttons .doctor-button {
+  background-color: #26C6DA; /* Lighter cyan button */
+}
+
+.hero-buttons a:hover {
+  opacity: 0.9;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+/* Why Choose Us Section */
+.why-choose-us-section,
+.features-overview-section,
+.cta-section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #19234B; /* Dark blue section background */
+}
+
+.why-choose-us-section h2,
+.features-overview-section h2,
+.cta-section h2 {
+  color: #81d4fa;
+  margin-bottom: 30px;
+  font-size: 2.2em;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.benefit {
+  padding: 30px;
+  border: 1px solid #3F51B5; /* Lighter dark blue border */
+  border-radius: 8px;
+  background-color: #25359A; /* Slightly darker blue card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  transition: transform 0.2s ease-in-out;
+  color: #E0F7FA; /* Light text */
+}
+
+.benefit:hover {
+  transform: translateY(-5px);
+}
+
+.benefit h3 {
+  color: #00BCD4; /* Cyan heading */
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.benefit p {
+  color: #B3E5FC; /* Light blue paragraph */
+}
+
+/* Features Overview Section */
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.feature {
+  padding: 30px;
+  border: 1px solid #3F51B5;
+  border-radius: 8px;
+  background-color: #25359A;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+  color: #E0F7FA; /* Light text */
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature h3 {
+  color: #00BCD4;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.feature p {
+  color: #B3E5FC;
+}
+
+/* Call to Action Section */
+.cta-section {
+  background-color: #25359A; /* Darker blue CTA background */
+  padding: 80px 20px;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+.cta-section h2 {
+  color: #81d4fa;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+}
+
+.cta-section p {
+  font-size: 1.2em;
+  color: #E0F7FA;
+  margin-bottom: 30px;
+}
+
+.cta-buttons a {
+  display: inline-block;
+  padding: 15px 30px;
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  margin: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  background-color: #00BCD4;
+  transition: background-color 0.3s ease;
+}
+
+.cta-buttons a:hover {
+  opacity: 0.9;
+}
+
+/* Footer */
+.landing-page-footer {
+  background-color: #19234B; /* Dark blue footer */
+  color: #E0F7FA;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 50px;
+}
+
+.landing-page-footer p {
+  margin: 0;
+}

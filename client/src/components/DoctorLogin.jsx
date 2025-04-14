@@ -8,40 +8,52 @@ function DoctorLogin() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // TODO: Implement Firebase doctor login logic here
     console.log('Doctor Login:', { email, password });
+    // TODO: Implement Firebase login logic
   };
 
   return (
     <div className="auth-container">
-      <h2>Doctor Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+      <div className="auth-card">
+        <h2>Doctor Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <div className="input-wrapper">
+              <span className="icon">📧</span>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <div className="input-wrapper">
+              <span className="icon">🔒</span>
+              <input
+                type="password"
+                id="password"
+                placeholder="Your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" className="auth-button login-button">Log In</button>
+        </form>
+        <div className="auth-link">
+          Don't have an account? <Link to="/doctor/signup">Sign Up as Doctor</Link>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div className="back-to-home">
+          <Link to="/">Back to Home</Link>
         </div>
-        <button type="submit" className="auth-button">Log In</button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/doctor/signup">Sign Up</Link>
-      </p>
-      <Link to="/">Back to Home</Link>
+      </div>
     </div>
   );
 }

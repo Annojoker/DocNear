@@ -1,102 +1,101 @@
+/* Dark Blue Theme for Doctor List */
 .doctor-list-container {
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  
-  .doctor-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-  
-  .back-button {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .doctors-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .doctor-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: white;
-  }
-  
-  .doctor-info h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  .doctor-info .specialty {
-    color: #777;
-    font-size: 0.9em;
-  }
-  
-  .doctor-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .chat-button,
-  .video-button {
-    display: inline-block;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .chat-button {
-    background-color: #008CBA; /* Blue */
-  }
-  
-  .video-button {
-    background-color: #4CAF50; /* Green */
-  }
-  
-  .chat-button:hover {
-    background-color: #0077b3;
-  }
-  
-  .video-button:hover {
-    background-color: #45a049;
-  }
-  .book-button {
-    display: inline-block;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-    background-color: #00c853; /* A nice green for booking */
-  }
-  
-  .book-button:hover {
-    background-color: #00a34a;
-  }
-  
-  .doctor-info .location {
-    color: #555;
-    font-size: 0.85em;
-    margin-bottom: 5px;
-  }
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0F7FA;
+  background-color: #19234B;
+  min-height: 80vh;
+}
+
+.doctor-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3F51B5;
+}
+
+.doctor-list-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #81d4fa;
+}
+
+.back-button {
+  color: #B3E5FC;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #E0F7FA;
+}
+
+.doctors-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid; /* Use grid for a responsive layout */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Minimum width of 300px, auto fit columns */
+  gap: 20px;
+}
+
+.doctor-card {
+  background-color: #25359A;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
+}
+
+.doctor-card:hover {
+  background-color: #3F51B5;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.doctor-info {
+  flex-grow: 1;
+}
+
+.doctor-info h3 {
+  margin-top: 0;
+  font-size: 1.3em;
+  color: #81d4fa;
+  margin-bottom: 5px;
+}
+
+.doctor-info .specialty,
+.doctor-info .location {
+  color: #B3E5FC;
+  font-size: 0.95em;
+  margin-bottom: 3px;
+}
+
+.doctor-actions {
+  margin-left: 20px;
+}
+
+.book-button {
+  background-color: #00BCD4;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.book-button:hover {
+  background-color: #26C6DA;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

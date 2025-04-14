@@ -1,85 +1,97 @@
+/* Dark Blue Theme for Chat */
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Make it take up the full viewport height */
-    font-family: sans-serif;
-  }
-  
-  .chat-header {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .chat-header h2 {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .back-button {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .message-area {
-    flex-grow: 1;
-    padding: 15px;
-    overflow-y: auto; /* Enable scrolling for long chats */
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .message {
-    padding: 10px 15px;
-    border-radius: 10px;
-    clear: both; /* Prevent floating issues */
-  }
-  
-  .message.sent {
-    background-color: #dcf8c6; /* Light green for sent messages */
-    align-self: flex-end; /* Align sent messages to the right */
-  }
-  
-  .message.received {
-    background-color: #e0f7fa; /* Light blue for received messages */
-    align-self: flex-start; /* Align received messages to the left */
-  }
-  
-  .message-input-area {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-top: 1px solid #ddd;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .message-input-area input[type='text'] {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  .message-input-area button {
-    padding: 10px 15px;
-    background-color: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-  }
-  
-  .message-input-area button:hover {
-    background-color: #1665c3;
-  }
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0F7FA;
+  background-color: #19234B;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3F51B5;
+}
+
+.chat-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #81d4fa;
+}
+
+.back-button {
+  color: #B3E5FC;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #E0F7FA;
+}
+
+.message-area {
+  flex-grow: 1;
+  overflow-y: auto; /* Enable scrolling for long conversations */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 80%;
+  clear: both; /* Prevent floating issues */
+}
+
+.sent {
+  background-color: #00BCD4;
+  color: white;
+  align-self: flex-end; /* Align patient's messages to the right */
+}
+
+.received {
+  background-color: #25359A;
+  color: #B3E5FC;
+  align-self: flex-start; /* Align doctor's messages to the left */
+}
+
+.message-input-area {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-top: 1px solid #3F51B5;
+}
+
+.message-input-area input[type='text'] {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #3F51B5;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #E0F7FA;
+}
+
+.message-input-area button {
+  background-color: #00BCD4;
+  color: white;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.message-input-area button:hover {
+  background-color: #26C6DA;
+}

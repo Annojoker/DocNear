@@ -1,93 +1,108 @@
+/* Dark Blue Theme for Patient Appointments */
 .appointments-container {
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  
-  .appointments-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-  
-  .back-button {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .appointments-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .appointment-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: white;
-  }
-  
-  .appointment-info h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  .appointment-info p {
-    color: #777;
-    font-size: 0.9em;
-    margin-bottom: 3px;
-  }
-  
-  .appointment-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .chat-button,
-  .video-button,
-  .appointment-actions span {
-    display: inline-block;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .chat-button {
-    background-color: #008CBA; /* Blue */
-  }
-  
-  .video-button {
-    background-color: #4CAF50; /* Green */
-  }
-  
-  .chat-button:hover {
-    background-color: #0077b3;
-  }
-  
-  .video-button:hover {
-    background-color: #45a049;
-  }
-  
-  .appointment-actions span {
-    background-color: #9e9e9e; /* Grey for ended consultations */
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 0.9em;
-  }
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #E0F7FA;
+  background-color: #19234B;
+  min-height: 80vh;
+}
+
+.appointments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3F51B5;
+}
+
+.appointments-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #81d4fa;
+}
+
+.back-button {
+  color: #B3E5FC;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #E0F7FA;
+}
+
+.appointments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
+}
+
+.appointment-card {
+  background-color: #25359A;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack info and actions vertically */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
+}
+
+.appointment-card:hover {
+  background-color: #3F51B5;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.appointment-info h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #00BCD4; /* Cyan for doctor's name */
+  margin-bottom: 10px;
+}
+
+.appointment-info p {
+  margin-bottom: 5px;
+  color: #B3E5FC;
+  font-size: 0.95em;
+}
+
+.appointment-info p:last-child {
+  margin-bottom: 0;
+}
+
+.appointment-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-button,
+.video-button {
+  background-color: #00BCD4;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.chat-button:hover,
+.video-button:hover {
+  background-color: #26C6DA;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.appointment-actions span {
+  color: #B3E5FC;
+  font-size: 0.95em;
+}
