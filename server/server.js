@@ -719,6 +719,46 @@ app.get('/api/doctors/:doctorId/history', async (req, res) => {
     }
 });
 
+// --- Get Consultation History for a Doctor ---
+app.get('/api/doctors/:doctorId/history', async (req, res) => {
+  try {
+      const doctorId = req.params.doctorId;
+
+      if (!doctorId) {
+          return res.status(400).json({ error: 'Doctor ID is required' });
+      }
+
+      const historyRef = db.collection('appointments');
+      const querySnapshot = await historyRef
+          .where('doctorId', '==', doctorId)
+          .where('status', 'in', ['Completed', 'Concluded']) // Adjust these statuses as needed
+          .orderBy('createdAt', 'desc') // Order by creation date, newest first
+          .get();
+
+      const consultationHistory = [];
+      for (const doc of querySnapshot.docs) {
+          const appointmentData = doc.data();
+          const patientId = appointmentData.patientId;
+
+          try {
+              const patientRef = db.collection('patients').doc(patientId);
+              const patientSnapshot = await patientRef.get();
+              const patientData = patientSnapshot.data();
+              consultationHistory.push({ id: doc.id, ...appointmentData, patientName: patientData ? patientData.name : 'Unknown Patient' });
+          } catch (error) {
+              console.error('Error fetching patient name for history:', error);
+              consultationHistory.push({ id: doc.id, ...appointmentData, patientName: 'Patient Info Unavailable' });
+          }
+      }
+
+      res.json(consultationHistory);
+
+  } catch (error) {
+      console.error('Error fetching consultation history:', error);
+      res.status(500).json({ error: 'Failed to fetch consultation history' });
+  }
+});
+
 
 
 // --- Start the server ---
