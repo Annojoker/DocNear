@@ -32,7 +32,12 @@ function PatientLogin() {
 
       if (response.ok) {
         console.log('Patient logged in and token verified:', data);
-        // TODO: Store authentication state
+
+        // Store the token and patient ID in localStorage
+        localStorage.setItem('patientAuthToken', idToken);
+        localStorage.setItem('patientId', user.uid);
+
+        // Redirect to the dashboard after successful login
         navigate('/patient/dashboard');
       } else {
         console.error('Token verification failed:', data.error);

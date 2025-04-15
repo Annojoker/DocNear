@@ -759,23 +759,25 @@ app.get('/api/doctors/:doctorId/history', async (req, res) => {
   }
 });
 
-// --- Send Chat Message ---
+// --- Send Chat Message (Handles both doctor and patient) ---
 app.post('/api/chat/send', async (req, res) => {
   try {
-      const doctorId = req.headers.doctorid; // Assuming you send doctorId in the headers
-      const { patientId, text } = req.body;
+      const currentUserId = req.headers.userid; // Get userId from headers
+      const userRole = req.headers.userrole; // Get userRole from headers ('doctor' or 'patient')
+      const { otherUserId, text } = req.body; // otherUserId will be patientId for doctor, doctorId for patient
 
-      if (!doctorId || !patientId || !text) {
-          return res.status(400).json({ error: 'Doctor ID, Patient ID, and message text are required' });
+      if (!currentUserId || !userRole || !otherUserId || !text) {
+          return res.status(400).json({ error: 'User ID, User Role, Other User ID, and message text are required' });
       }
 
-      // Verify doctor's authentication (you might have a middleware for this)
-      // For simplicity here, we'll just check if doctorId is present
+      const senderType = userRole;
+      const receiverId = otherUserId;
+      const senderId = currentUserId;
 
       const newMessage = {
-          senderId: doctorId,
-          receiverId: patientId,
-          senderType: 'doctor',
+          senderId: senderId,
+          receiverId: receiverId,
+          senderType: senderType,
           text: text.trim(),
           timestamp: admin.firestore.FieldValue.serverTimestamp(),
       };
@@ -790,40 +792,34 @@ app.post('/api/chat/send', async (req, res) => {
   }
 });
 
-// --- Get Chat History for a Patient ---
-app.get('/api/chat/:patientId', async (req, res) => {
+// --- Get Chat History for a User ---
+app.get('/api/chat/:otherUserId', async (req, res) => {
   try {
-      const doctorId = req.headers.doctorid;
-      const { patientId } = req.params;
+      const currentUserId = req.headers.userid; // Assuming you send userId in the headers
+      const userRole = req.headers.userrole; // Assuming you send userRole in the headers ('doctor' or 'patient')
+      const { otherUserId } = req.params;
 
-      console.log('Fetching chat history for doctorId:', doctorId, 'and patientId:', patientId); // Log the IDs
-
-      if (!doctorId || !patientId) {
-          return res.status(400).json({ error: 'Doctor ID and Patient ID are required' });
+      if (!currentUserId || !userRole || !otherUserId) {
+          return res.status(400).json({ error: 'User ID, User Role, and Other User ID are required' });
       }
 
       const chatsRef = db.collection('chats');
       const querySnapshot = await chatsRef
-          .where('senderId', 'in', [doctorId, patientId])
-          .where('receiverId', 'in', [doctorId, patientId])
+          .where('senderId', 'in', [currentUserId, otherUserId])
+          .where('receiverId', 'in', [currentUserId, otherUserId])
           .orderBy('timestamp')
           .get();
-
-      console.log('Query snapshot size:', querySnapshot.size); // Log the number of documents found
 
       const chatHistory = [];
       querySnapshot.forEach(doc => {
           const data = doc.data();
-          console.log('Document data:', data); // Log the data of each document
-
           chatHistory.push({
-              sender: data.senderId === doctorId ? 'doctor' : 'patient',
+              sender: data.senderId === currentUserId ? userRole : (userRole === 'doctor' ? 'patient' : 'doctor'),
               text: data.text,
               timestamp: data.timestamp ? data.timestamp.toDate() : null,
           });
       });
 
-      console.log('Chat history:', chatHistory); // Log the final chat history array
       res.json(chatHistory);
 
   } catch (error) {

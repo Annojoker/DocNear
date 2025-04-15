@@ -33,8 +33,8 @@ function App() {
         <Route path="/patient/dashboard" element={<PatientDashboard />} />
         <Route path="/patient/doctors" element={<DoctorList />} />
         <Route path="/patient/book-appointment/:doctorId" element={<BookAppointment />} />
-        <Route path="/patient/chat" element={<PatientChat />} />
-        <Route path="/patient/video" element={<PatientVideo />} />
+        <Route path="/patient/chat/:doctorId" element={<PatientChat />} /> {/* New route */}
+        <Route path="/patient/video/:doctorId" element={<PatientVideo />} /> {/* New route */}
         <Route path="/patient/hospitals" element={<HospitalsMap />} />
         <Route path="/patient/pharmacies" element={<PharmaciesMap />} />
         <Route path="/patient/ambulance" element={<AmbulanceRequest />} />

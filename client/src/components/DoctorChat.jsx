@@ -5,17 +5,12 @@ import './ChatStyles.css'; // Reusing styles
 function DoctorChat() {
   const { patientId } = useParams(); // Assuming patientId is in the route
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([
-    { sender: 'doctor', text: 'Hello! How can I help you today?' },
-    { sender: 'patient', text: 'Hi, I have a question about...' },
-    // More messages will go here
-  ]); // Initialize as empty
+  const [messages, setMessages] = useState([]); // Initialize as empty
 
   useEffect(() => {
     const fetchChatHistory = async () => {
       const doctorId = localStorage.getItem('doctorId');
       const doctorAuthToken = localStorage.getItem('doctorAuthToken');
-
       if (!doctorId || !doctorAuthToken || !patientId) {
         console.error('Doctor ID, authentication token, or Patient ID not found.');
         return;
@@ -27,10 +22,12 @@ function DoctorChat() {
           headers: {
             'Content-Type': 'application/json',
             'doctorId': doctorId,
+            'userId': doctorId, // Send doctor's ID in the headers
+            'userRole': 'doctor', // Indicate the user role
             'Authorization': `Bearer ${doctorAuthToken}`,
           },
         });
-
+        
         if (!response.ok) {
           console.error('Failed to fetch chat history.');
           let errorMessage = 'Failed to fetch chat history.';
@@ -74,9 +71,11 @@ function DoctorChat() {
           headers: {
             'Content-Type': 'application/json',
             'doctorId': doctorId, // Send doctor's ID in the headers
+            'userId': doctorId, // Send doctor's ID in the headers
+            'userRole': 'doctor', // Indicate the user role
             'Authorization': `Bearer ${doctorAuthToken}`, // Send authorization token
           },
-          body: JSON.stringify({ patientId: patientId, text: message }),
+          body: JSON.stringify({ otherUserId: patientId, text: message }),
         });
 
         if (!response.ok) {
