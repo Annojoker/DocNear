@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './AuthStyles.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './AuthStyles.css'; // You can reuse or create a new style file
 
 function PatientSignUp() {
   const [name, setName] = useState('');
@@ -8,10 +8,11 @@ function PatientSignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setPasswordError(''); // Clear any previous error
+    setPasswordError('');
 
     if (password.length < 8) {
       setPasswordError('Password must be at least 8 characters long.');
@@ -23,8 +24,29 @@ function PatientSignUp() {
       return;
     }
 
-    console.log('Patient Sign Up:', { name, email, password });
-    // TODO: Implement Firebase signup logic
+    try {
+      const response = await fetch('http://localhost:5000/api/patients/signup', { // Backend endpoint (to be created)
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }), // Include relevant patient data
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Patient account created:', data);
+        navigate('/patient/dashboard'); // Redirect to patient dashboard
+      } else {
+        console.error('Signup failed:', data.error);
+        setPasswordError(data.error || 'Signup failed');
+      }
+
+    } catch (error) {
+      console.error('Signup error:', error);
+      setPasswordError('Failed to connect to the server');
+    }
   };
 
   return (
@@ -53,7 +75,7 @@ function PatientSignUp() {
               <input
                 type="email"
                 id="email"
-                placeholder="Your email"
+                placeholder="Your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -67,7 +89,7 @@ function PatientSignUp() {
               <input
                 type="password"
                 id="password"
-                placeholder="Create a password"
+                placeholder="Create a secure password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -92,7 +114,7 @@ function PatientSignUp() {
           <button type="submit" className="auth-button signup-button">Sign Up</button>
         </form>
         <div className="auth-link">
-          Already have an account? <Link to="/patient/login">Log In</Link>
+          Already a patient? <Link to="/patient/login">Log In</Link>
         </div>
         <div className="back-to-home">
           <Link to="/">Back to Home</Link>

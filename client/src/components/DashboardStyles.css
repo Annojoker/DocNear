@@ -5,6 +5,7 @@
   color: #E0F7FA;
   background-color: #19234B;
   min-height: 80vh;
+  overflow-x: auto; /* Add horizontal scroll if content overflows */
 }
 
 .dashboard-header {
@@ -36,10 +37,16 @@
   padding: 20px;
   text-align: center;
   text-decoration: none;
-  width: calc(33.33% - 20px);
+  /* width: calc(33.33% - 20px); Let's try a fixed minimum width */
+  min-width: 180px; /* Increased minimum width */
   box-sizing: border-box;
   transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  min-height: 120px; /* Increased minimum height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center the content */
+  align-items: center; /* Horizontally center the content */
 }
 
 .action-card:hover {
@@ -50,12 +57,13 @@
 
 .action-icon {
   font-size: 2.5em;
-  margin-bottom: 10px;
+  margin-bottom: 5px; /* Reduced margin to allow more space for text */
 }
 
 .action-card span {
   font-size: 1.1em;
   font-weight: bold;
+  text-align: center; /* Ensure text is centered */
 }
 
 .dashboard-section {
@@ -72,47 +80,6 @@
   font-size: 1.4em;
 }
 
-.dashboard-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.dashboard-section li {
-  color: #B3E5FC;
-  padding: 10px 0;
-  border-bottom: 1px solid #3F51B5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Space out request info and buttons */
-}
-
-.dashboard-section li:last-child {
-  border-bottom: none;
-}
-
-.dashboard-section li strong {
-  color: #E0F7FA;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.dashboard-section li button {
-  background-color: #00BCD4;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9em;
-  cursor: pointer !important; /* Using !important */
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-
-.dashboard-section li button:hover {
-  background-color: #26C6DA;
-}
-
 .dashboard-section p {
   color: #B3E5FC;
   font-style: italic;
@@ -121,12 +88,14 @@
 /* Responsive adjustments (you might need to tweak these) */
 @media (max-width: 768px) {
   .action-card {
-    width: calc(50% - 20px);
+      /* width: calc(50% - 20px); Adjust for smaller screens */
+      min-width: 150px;
   }
 }
 
 @media (max-width: 480px) {
   .action-card {
-    width: 100%;
+      width: 100%;
+      min-width: auto; /* Allow full width */
   }
 }

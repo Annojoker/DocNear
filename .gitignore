@@ -1,3 +1,5 @@
 server/env/
 server/__pycache__/
 server/node_modules/
+server/.env
+server/serviceAccountKey.json

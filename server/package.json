@@ -10,9 +10,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "firebase-admin": "^13.2.0"
+    "firebase-admin": "^13.2.0",
+    "node-fetch": "^3.3.2",
+    "twilio": "^5.5.2"
   }
 }

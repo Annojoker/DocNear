@@ -1,11 +1,18 @@
-/* Further adjustments for more horizontal layout on Ambulance Request */
-.ambulance-container {
+/* Further adjustments for a richer dark blue theme on Ambulance Request */
+body {
+  background-color: #0D1A2E; /* Same deep dark blue as the container */
+  color: #E0F7FA; /* Set a default light text color for the body as well */
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font */
+
+}.ambulance-container {
   display: flex;
   flex-direction: column;
   padding: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #E0F7FA;
-  background-color: #19234B;
+  color: #E0F7FA; /* Light text color */
+  background-color: #0D1A2E; /* Deeper dark blue background */
   min-height: 80vh;
 }
 
@@ -14,79 +21,103 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  border-bottom: 1px solid #3F51B5;
-  padding-bottom: 15px;
+  border-bottom: 2px solid #2E5CB8; /* More prominent blue border */
+  padding-bottom: 18px;
 }
 
 .ambulance-header h2 {
   margin: 0;
-  font-size: 1.5em;
-  color: #81d4fa;
+  font-size: 2.0em; /* More impactful heading */
+  color: #64B5F6; /* Brighter blue for heading */
 }
 
 .back-button {
-  color: #B3E5FC;
-  font-size: 1em;
+  color: #81D4FA; /* Lighter blue for back button */
+  font-size: 1.1em;
   text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: rgba(30, 41, 59, 0.6); /* Slightly transparent dark background */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .back-button:hover {
-  text-decoration: underline;
-  color: #E0F7FA;
+  text-decoration: none; /* Remove underline on hover for cleaner look */
+  color: #E1F5FE; /* Even lighter blue on hover */
+  background-color: #152747; /* Darker blue on hover */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .ambulance-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 600px; /* Slightly wider form */
+  gap: 25px;
+  max-width: 750px; /* Even wider form */
   margin: 0 auto;
-  padding: 25px;
-  background-color: #25359A;
-  border-radius: 10px;
+  padding: 35px; /* More padding inside the form */
+  background-color: #1A2947; /* Darker blue form background */
+  border-radius: 15px; /* More pronounced border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a shadow to the form */
 }
 
 .form-group {
   display: flex;
-  flex-direction: row; /* Keep horizontal arrangement as default */
-  align-items: center; /* Vertically align label and input */
-  gap: 15px; /* Spacing between label and input */
+  flex-direction: row; /* Keep horizontal arrangement */
+  align-items: center;
+  gap: 25px; /* More spacing */
 }
 
 label {
-  flex-basis: 35%; /* Slightly wider label area */
+  flex-basis: 30%;
   text-align: left;
   font-weight: bold;
-  color: #E0F7FA;
-  font-size: 1.1em;
+  color: #BBDEFB; /* Softer blue for labels */
+  font-size: 1.15em;
 }
 
 input[type='text'],
 input[type='tel'] {
-  flex-grow: 1; /* Allow input to take up remaining space */
-  padding: 12px;
-  border: 1px solid #3F51B5;
-  border-radius: 8px;
-  font-size: 1em;
-  background-color: rgba(255, 255, 255, 0.15);
+  flex-grow: 1;
+  padding: 16px; /* More padding inside inputs */
+  border: 1px solid #2E5CB8; /* Blue border for inputs */
+  border-radius: 10px;
+  font-size: 1.1em;
+  background-color: rgba(255, 255, 255, 0.08); /* Subtle white overlay */
   color: #E0F7FA;
+  transition: border-color 0.3s ease;
+}
+
+input[type='text']:focus,
+input[type='tel']:focus {
+  border-color: #64B5F6; /* Brighter blue on focus */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(100, 181, 246, 0.5); /* Subtle focus shadow */
 }
 
 textarea {
-  width: 100%; /* Make textarea full width within its form-group */
-  padding: 12px;
-  border: 1px solid #3F51B5;
-  border-radius: 8px;
-  font-size: 1em;
-  background-color: rgba(255, 255, 255, 0.15);
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #2E5CB8; /* Blue border for textarea */
+  border-radius: 10px;
+  font-size: 1.1em;
+  background-color: rgba(255, 255, 255, 0.08);
   color: #E0F7FA;
-  min-height: 100px;
+  min-height: 150px; /* Taller textarea */
+  transition: border-color 0.3s ease;
 }
 
-/* Special handling for textarea to make label appear above */
+textarea:focus {
+  border-color: #64B5F6;
+  outline: none;
+  box-shadow: 0 0 5px rgba(100, 181, 246, 0.5);
+}
+
+/* Textarea label above */
 .form-group:has(textarea) {
   flex-direction: column;
   align-items: flex-start;
+  gap: 10px; /* Reduced gap for textarea group */
 }
 
 .form-group:has(textarea) label {
@@ -96,51 +127,66 @@ textarea {
 }
 
 .request-button {
-  background-color: #D32F2F;
+  background-color: #d10e0e; /* Primary blue button */
   color: white;
-  padding: 15px 20px;
+  padding: 18px 30px; /* Larger button padding */
   border: none;
-  border-radius: 8px;
-  font-size: 1.2em;
+  border-radius: 10px;
+  font-size: 1.3em;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  margin-top: 20px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6); /* More prominent shadow */
+  margin-top: 30px;
 }
 
 .request-button:hover {
-  background-color: #B71C1C;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  background-color: #3F51B5; /* Slightly lighter blue on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.7); /* Even more prominent shadow on hover */
 }
 
 .map-placeholder {
-  background-color: #19234B;
-  border: 2px dashed #3F51B5;
-  border-radius: 8px;
-  padding: 60px;
-  margin-bottom: 20px;
+  background-color: #0D1A2E; /* Dark blue placeholder */
+  border: 2px dashed #2E5CB8; /* Blue dashed border */
+  border-radius: 10px;
+  padding: 75px; /* More padding */
+  margin-bottom: 30px;
   text-align: center;
-  color: #B3E5FC;
-  font-size: 1.1em;
+  color: #81D4FA; /* Lighter blue text */
+  font-size: 1.2em;
   cursor: pointer;
-}
-
-.map-placeholder:hover {
-  background-color: #25359A;
+  transition: background-color 0.3s ease, opacity 0.2s ease-in-out;
   opacity: 0.9;
 }
 
-/* Adjust the breakpoint for vertical stacking to a smaller width */
-@media (max-width: 450px) {
-  .form-group {
-    flex-direction: column; /* Stack label and input vertically on very small screens */
+.map-placeholder:hover {
+  background-color: #1A2947; /* Slightly lighter dark blue on hover */
+  opacity: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .ambulance-header {
+    flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .ambulance-header h2 {
+    font-size: 1.8em;
+  }
+
+  .form-group {
+    flex-direction: column; /* Stack on smaller screens */
+    align-items: flex-start;
+    gap: 12px;
   }
 
   label {
     width: 100%;
     text-align: left;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
   }
 }

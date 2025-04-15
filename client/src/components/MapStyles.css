@@ -1,5 +1,5 @@
 /* Dark Blue Theme for Hospitals Map */
-.map-container {
+.nearby-hospitals-container { /* Changed .map-container to be specific */
   padding: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #E0F7FA;
@@ -9,7 +9,7 @@
   flex-direction: column;
 }
 
-.map-header {
+.nearby-hospitals-header { /* Changed .map-header to be specific */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,10 +18,33 @@
   border-bottom: 1px solid #3F51B5;
 }
 
-.map-header h2 {
+.nearby-hospitals-header h2 { /* Changed .map-header h2 to be specific */
   margin: 0;
   font-size: 1.8em;
   color: #81d4fa;
+}
+
+.selected-hospital-info {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #2E3A59; /* A slightly lighter shade */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #B3E5FC;
+}
+
+.selected-hospital-info h3 {
+  color: #81d4fa;
+  margin-top: 0;
+}
+
+.selected-hospital-info .address {
+  margin-bottom: 10px;
+}
+
+.selected-hospital-info .rating {
+  font-style: italic;
+  color: #E0F7FA;
 }
 
 .back-button {
@@ -35,7 +58,7 @@
   color: #E0F7FA;
 }
 
-.map-area {
+.map-area { /* Keep this if you have a specific div with this class */
   background-color: #25359A;
   border-radius: 10px;
   padding: 50px;
@@ -45,6 +68,28 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* If you anticipate loading a map library that might have its own styling,
-   you might need to add more specific rules here to ensure it integrates well
-   with your dark blue theme. For example, adjusting marker colors, info windows, etc. */
+/* Style for the Leaflet map container */
+.leaflet-container {
+  width: 100%;
+  height: 500px; /* Or whatever height you've set in your JSX */
+  border-radius: 10px; /* Optional: round the map corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Optional: add a shadow */
+}
+
+/* You might need to adjust marker styles or popup styles here */
+.leaflet-popup-content-wrapper {
+  background-color: #212121; /* Dark background for popup */
+  color: #e0f7fa;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+}
+
+.leaflet-popup-content h3 {
+  color: #81d4fa;
+  margin-top: 0;
+}
+

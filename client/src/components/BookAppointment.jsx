@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import './BookAppointmentStyles.css'; // We'll create this CSS file
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { getAuth } from 'firebase/auth'; // Ensure Firebase is initialized in your project
+import './BookAppointmentStyles.css'; // Ensure this CSS file exists
 
 function BookAppointment() {
   const { doctorId } = useParams();
@@ -8,37 +9,92 @@ function BookAppointment() {
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
   const [reason, setReason] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  // In a real application, we'd fetch doctor details based on doctorId
   useEffect(() => {
-    // Placeholder for fetching doctor details
     const fetchDoctor = async () => {
-      // Simulate fetching doctor data
-      const doctorsData = [
-        { id: 'doc1', name: 'Dr. Anya Sharma', specialty: 'Cardiologist', location: 'Apollo Hospitals, Chennai' },
-        { id: 'doc2', name: 'Dr. Ben Carter', specialty: 'Pediatrician', location: 'City Clinic, Tambaram' },
-        { id: 'doc3', name: 'Dr. Chloe Davis', specialty: 'Dermatologist', location: 'Skin Care Center, Velachery' },
-      ];
-      const selectedDoctor = doctorsData.find((doc) => doc.id === doctorId);
-      setDoctorDetails(selectedDoctor);
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(`http://localhost:5000/api/doctors/${doctorId}`);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `Failed to fetch doctor details: ${response.status}`);
+        }
+        const data = await response.json();
+        setDoctorDetails(data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching doctor details:', err);
+        setError(err.message || 'Failed to fetch doctor details');
+        setLoading(false);
+      }
     };
 
     fetchDoctor();
   }, [doctorId]);
 
-  const handleBookAppointment = (event) => {
+  const handleBookAppointment = async (event) => {
     event.preventDefault();
     if (!appointmentDate || !appointmentTime) {
       alert('Please select a date and time for your appointment.');
       return;
     }
-    // TODO: Implement booking appointment logic (likely to Firebase)
-    console.log('Appointment Booked:', { doctorId, appointmentDate, appointmentTime, reason });
-    alert('Appointment booked successfully!'); // Temporary feedback
-    setAppointmentDate('');
-    setAppointmentTime('');
-    setReason('');
+
+    // In a real application, get the logged-in user's ID securely
+
+    const auth = getAuth();
+    const patientId = auth.currentUser ? auth.currentUser.uid : null;
+
+    const appointmentData = {
+      doctorId: doctorId,
+      patientId: patientId,
+      date: appointmentDate,
+      time: appointmentTime,
+      reason: reason,
+      status: 'Pending', // Initial status
+    };
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `Failed to book appointment: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Appointment request sent:', data);
+      alert('Appointment request sent successfully! Waiting for doctor approval.');
+      navigate('/patient/appointments'); // Redirect to My Appointments
+      setAppointmentDate('');
+      setAppointmentTime('');
+      setReason('');
+    } catch (error) {
+      console.error('Error booking appointment:', error);
+      alert(error.message);
+      setLoading(false);
+    }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   if (!doctorDetails) {
     return <div>Loading doctor details...</div>;
@@ -52,8 +108,9 @@ function BookAppointment() {
       </header>
       <div className="doctor-info-section">
         <h3>{doctorDetails.name}</h3>
-        <p className="specialty">{doctorDetails.specialty}</p>
-        <p className="location">Location: {doctorDetails.location}</p>
+        {doctorDetails.specialty && <p className="specialty">{doctorDetails.specialty}</p>}
+        {doctorDetails.location && <p className="location">Location: {doctorDetails.location}</p>}
+        {/* Add more doctor details here if needed */}
       </div>
       <form onSubmit={handleBookAppointment} className="book-appointment-form">
         <div className="form-group">
@@ -85,7 +142,9 @@ function BookAppointment() {
             placeholder="Briefly describe your concern"
           />
         </div>
-        <button type="submit" className="book-button">Confirm Appointment</button>
+        <button type="submit" className="book-button" disabled={loading}>
+          {loading ? 'Submitting...' : 'Request Appointment'}
+        </button>
       </form>
     </div>
   );

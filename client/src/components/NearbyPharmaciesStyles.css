@@ -1,0 +1,68 @@
+/* Dark Blue Theme for Nearby Pharmacies */
+.nearby-pharmacies-container {
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #E0F7FA;
+    background-color: #19234B;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nearby-pharmacies-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #3F51B5;
+  }
+  
+  .nearby-pharmacies-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #81d4fa;
+  }
+  
+  .back-button {
+    color: #B3E5FC;
+    font-size: 1em;
+    text-decoration: none;
+  }
+  
+  .back-button:hover {
+    text-decoration: underline;
+    color: #E0F7FA;
+  }
+  
+  .leaflet-container {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  .selected-pharmacy-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #2E3A59;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #B3E5FC;
+  }
+  
+  .selected-pharmacy-info h3 {
+    color: #81d4fa;
+    margin-top: 0;
+  }
+  
+  .selected-pharmacy-info .address {
+    margin-bottom: 10px;
+  }
+  
+  .selected-pharmacy-info .rating {
+    font-style: italic;
+    color: #E0F7FA;
+  }
+  
+  /* Add any other specific styles for pharmacies here */
