@@ -12,35 +12,95 @@ function DoctorChat() {
   ]); // Initialize as empty
 
   useEffect(() => {
-    // TODO: Fetch initial messages for this patient from Firebase
-    // and populate the 'messages' state.
-    // The messages fetched should have 'sender' ('doctor' or 'patient') and 'text' properties.
-    // Example (adapt to your Firebase setup):
-    // const fetchChatHistory = async () => {
-    //   const chatData = await firebase.firestore()
-    //     .collection('chats')
-    //     .where('patientId', '==', patientId)
-    //     // Optionally filter by doctor if needed
-    //     .orderBy('timestamp')
-    //     .get();
-    //   const initialMessages = chatData.docs.map(doc => doc.data());
-    //   setMessages(initialMessages);
-    // };
-    // fetchChatHistory();
+    const fetchChatHistory = async () => {
+      const doctorId = localStorage.getItem('doctorId');
+      const doctorAuthToken = localStorage.getItem('doctorAuthToken');
 
-    // TODO: Set up real-time listener for new messages (optional)
+      if (!doctorId || !doctorAuthToken || !patientId) {
+        console.error('Doctor ID, authentication token, or Patient ID not found.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/chat/${patientId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'doctorId': doctorId,
+            'Authorization': `Bearer ${doctorAuthToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          console.error('Failed to fetch chat history.');
+          let errorMessage = 'Failed to fetch chat history.';
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorMessage;
+          } catch (e) {
+            console.error('Error parsing error response:', e);
+          }
+          console.error(errorMessage);
+        } else {
+          const data = await response.json();
+          setMessages(data);
+        }
+      } catch (error) {
+        console.error('Error fetching chat history:', error);
+      }
+    };
+
+    fetchChatHistory();
   }, [patientId]);
 
-  const handleSendMessage = (event) => {
+  const handleSendMessage = async (event) => {
     event.preventDefault();
     if (message.trim()) {
+      const doctorId = localStorage.getItem('doctorId'); // Get doctor's ID from localStorage
+      const doctorAuthToken = localStorage.getItem('doctorAuthToken'); // Get doctor's auth token
+
+      if (!doctorId || !doctorAuthToken) {
+        console.error('Doctor ID or authentication token not found.');
+        return;
+      }
+
       const newMessage = { sender: 'doctor', text: message };
-      setMessages([...messages, newMessage]);
+      setMessages([...messages, newMessage]); // Optimistically update local state
       setMessage('');
-      // TODO: Implement sending message to Firebase
-      console.log('Sending message:', newMessage, 'to patient:', patientId);
-      // Example (adapt to your Firebase setup):
-      // firebase.firestore().collection('chats').add(newMessage);
+
+      try {
+        const response = await fetch('http://localhost:5000/api/chat/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'doctorId': doctorId, // Send doctor's ID in the headers
+            'Authorization': `Bearer ${doctorAuthToken}`, // Send authorization token
+          },
+          body: JSON.stringify({ patientId: patientId, text: message }),
+        });
+
+        if (!response.ok) {
+          console.error('Failed to send message to backend.');
+          let errorMessage = 'Failed to send message.';
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorMessage;
+          } catch (e) {
+            console.error('Error parsing error response:', e);
+          }
+          console.error(errorMessage);
+          // Optionally revert the optimistic update:
+          // setMessages(messages.slice(0, -1));
+        } else {
+          const data = await response.json();
+          console.log('Message sent successfully:', data);
+          // Optionally update local messages with the message ID from the backend if needed
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+        // Optionally revert the optimistic update:
+        // setMessages(messages.slice(0, -1));
+      }
     }
   };
 

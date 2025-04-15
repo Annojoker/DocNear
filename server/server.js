@@ -759,7 +759,78 @@ app.get('/api/doctors/:doctorId/history', async (req, res) => {
   }
 });
 
+// --- Send Chat Message ---
+app.post('/api/chat/send', async (req, res) => {
+  try {
+      const doctorId = req.headers.doctorid; // Assuming you send doctorId in the headers
+      const { patientId, text } = req.body;
 
+      if (!doctorId || !patientId || !text) {
+          return res.status(400).json({ error: 'Doctor ID, Patient ID, and message text are required' });
+      }
+
+      // Verify doctor's authentication (you might have a middleware for this)
+      // For simplicity here, we'll just check if doctorId is present
+
+      const newMessage = {
+          senderId: doctorId,
+          receiverId: patientId,
+          senderType: 'doctor',
+          text: text.trim(),
+          timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      const docRef = await db.collection('chats').add(newMessage);
+
+      res.status(201).json({ message: 'Message sent successfully', messageId: docRef.id });
+
+  } catch (error) {
+      console.error('Error sending chat message:', error);
+      res.status(500).json({ error: 'Failed to send message' });
+  }
+});
+
+// --- Get Chat History for a Patient ---
+app.get('/api/chat/:patientId', async (req, res) => {
+  try {
+      const doctorId = req.headers.doctorid;
+      const { patientId } = req.params;
+
+      console.log('Fetching chat history for doctorId:', doctorId, 'and patientId:', patientId); // Log the IDs
+
+      if (!doctorId || !patientId) {
+          return res.status(400).json({ error: 'Doctor ID and Patient ID are required' });
+      }
+
+      const chatsRef = db.collection('chats');
+      const querySnapshot = await chatsRef
+          .where('senderId', 'in', [doctorId, patientId])
+          .where('receiverId', 'in', [doctorId, patientId])
+          .orderBy('timestamp')
+          .get();
+
+      console.log('Query snapshot size:', querySnapshot.size); // Log the number of documents found
+
+      const chatHistory = [];
+      querySnapshot.forEach(doc => {
+          const data = doc.data();
+          console.log('Document data:', data); // Log the data of each document
+
+          chatHistory.push({
+              sender: data.senderId === doctorId ? 'doctor' : 'patient',
+              text: data.text,
+              timestamp: data.timestamp ? data.timestamp.toDate() : null,
+          });
+      });
+
+      console.log('Chat history:', chatHistory); // Log the final chat history array
+      res.json(chatHistory);
+
+  } catch (error) {
+      console.error('Error fetching chat history:', error);
+      res.status(500).json({ error: 'Failed to fetch chat history' });
+  }
+});
 
 // --- Start the server ---
 app.listen(port, () => {
