@@ -281,11 +281,10 @@ app.post('/api/doctors/verify-token', async (req, res) => {
       try {
         const decodedToken = await admin.auth().verifyIdToken(idToken);
         const uid = decodedToken.uid;
-  
+)
         // Token is valid. You can now proceed to establish a session or retrieve user data.
         // For this example, we'll just send back a success message and the UID.
         res.json({ message: 'ID token verified successfully', uid: uid });
-  
       } catch (error) {
         console.error('Error verifying ID token:', error);
         return res.status(401).json({ error: 'Unauthorized: Invalid ID token' });
