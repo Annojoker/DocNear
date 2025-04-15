@@ -3,4 +3,4 @@ server/__pycache__/
 server/node_modules/
 server/.env
 server/serviceAccountKey.json
-client/firebase.js
+client/src/firebase.js
