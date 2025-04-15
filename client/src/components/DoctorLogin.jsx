@@ -1,23 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth'; // Keep these
-import { auth } from '../firebase'; // Keep this (your initialized auth instance)
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { auth } from '../firebase';
 import './AuthStyles.css';
-
-
-const handleDoctorLogin = async (email, password) => {
-    try {
-        await setPersistence(auth, browserLocalPersistence); // Use browserLocalPersistence for persistence
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        const token = await user.getIdToken();
-        console.log('Doctor logged in and token verified:', { message: 'ID token verified successfully', uid: user.uid });
-        // Redirect to dashboard or update state
-    } catch (error) {
-        console.error('Doctor login error:', error);
-        // Handle error
-    }
-};
 
 function DoctorLogin() {
   const [email, setEmail] = useState('');
@@ -30,25 +15,26 @@ function DoctorLogin() {
     setLoginError('');
 
     try {
+      await setPersistence(auth, browserLocalPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      const idToken = await user.getIdToken(); // Get the ID token
+      const idToken = await user.getIdToken();
 
-      // Send the ID token to your backend for verification
       const response = await fetch('http://localhost:5000/api/doctors/verify-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${idToken}`, // Send the token in the Authorization header
+          'Authorization': `Bearer ${idToken}`,
         },
-        body: JSON.stringify({ uid: user.uid }), // Optionally send the UID
+        body: JSON.stringify({ uid: user.uid }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         console.log('Doctor logged in and token verified:', data);
-        // TODO: Store authentication state (e.g., in local storage, context)
+        localStorage.setItem('doctorAuthToken', idToken);
+        localStorage.setItem('doctorId', user.uid);
         navigate('/doctor/dashboard');
       } else {
         console.error('Token verification failed:', data.error);

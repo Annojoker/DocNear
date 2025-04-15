@@ -31,6 +31,14 @@ body {
   color: #64B5F6; /* Brighter blue for heading */
 }
 
+.ambulance-request-header {
+  color: #ffff; /* Softer blue for subheading */
+}
+
+.map-instruction {
+  color: #ffff;
+}
+
 .back-button {
   color: #81D4FA; /* Lighter blue for back button */
   font-size: 1.1em;

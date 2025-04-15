@@ -99,3 +99,22 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
+
+
+.filter-controls input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+.filter-controls button {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.filter-controls button:hover {
+  background-color: #3F51B5;
+  color: #E0F7FA;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

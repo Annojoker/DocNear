@@ -281,11 +281,10 @@ app.post('/api/doctors/verify-token', async (req, res) => {
       try {
         const decodedToken = await admin.auth().verifyIdToken(idToken);
         const uid = decodedToken.uid;
-)
         // Token is valid. You can now proceed to establish a session or retrieve user data.
         // For this example, we'll just send back a success message and the UID.
         res.json({ message: 'ID token verified successfully', uid: uid });
-      } catch (error) {
+        } catch (error) {
         console.error('Error verifying ID token:', error);
         return res.status(401).json({ error: 'Unauthorized: Invalid ID token' });
       }
@@ -550,29 +549,41 @@ app.post('/api/appointments', async (req, res) => {
     }
 });
 
-// --- Get Appointments for a Doctor ---
+// --- Get Appointments for a Doctor (your "Incoming Requests" endpoint) ---
 app.get('/api/doctors/:doctorId/appointments', async (req, res) => {
-    try {
-        const doctorId = req.params.doctorId;
+  try {
+      const doctorId = req.params.doctorId;
+      const statusFilter = req.query.status; // Check if there's a status filter in the query
 
-        if (!doctorId) {
-            return res.status(400).json({ error: 'Doctor ID is required' });
-        }
+      if (!doctorId) {
+          return res.status(400).json({ error: 'Doctor ID is required' });
+      }
 
-        const appointmentsRef = db.collection('appointments');
-        const querySnapshot = await appointmentsRef.where('doctorId', '==', doctorId).get();
+      const appointmentsRef = db.collection('appointments');
+      let query = appointmentsRef.where('doctorId', '==', doctorId);
 
-        const doctorAppointments = [];
-        querySnapshot.forEach(doc => {
-            doctorAppointments.push({ id: doc.id, ...doc.data() });
-        });
+      // Apply status filter if provided (e.g., /api/doctors/123/appointments?status=Pending)
+      if (statusFilter) {
+          query = query.where('status', '==', statusFilter);
+      } else {
+          // If no status filter, you might want to return ALL appointments
+          // OR, if this is specifically for "incoming requests",
+          // you should ALWAYS filter by 'Pending' status.
+          query = query.where('status', '==', 'Pending'); // Ensure only pending requests are fetched
+      }
 
-        res.json(doctorAppointments);
+      const querySnapshot = await query.get();
+      const doctorAppointments = [];
+      querySnapshot.forEach(doc => {
+          doctorAppointments.push({ id: doc.id, ...doc.data() });
+      });
 
-    } catch (error) {
-        console.error('Error fetching appointments for doctor:', error);
-        res.status(500).json({ error: 'Failed to fetch appointments' });
-    }
+      res.json(doctorAppointments);
+
+  } catch (error) {
+      console.error('Error fetching appointments for doctor:', error);
+      res.status(500).json({ error: 'Failed to fetch appointments' });
+  }
 });
 
 // --- Approve Appointment Endpoint ---
@@ -626,6 +637,89 @@ await appointmentRef.update({ date: date, time: time });
         res.status(500).json({ error: 'Failed to reschedule appointment' });
     }
 });
+
+// --- Get Confirmed/Upcoming Appointments for a Doctor ---
+app.get('/api/doctors/:doctorId/appointments/confirmed', async (req, res) => {
+  try {
+      const doctorId = req.params.doctorId;
+
+      if (!doctorId) {
+          return res.status(400).json({ error: 'Doctor ID is required' });
+      }
+
+      const appointmentsRef = db.collection('appointments');
+      const querySnapshot = await appointmentsRef
+          .where('doctorId', '==', doctorId)
+          .where('status', 'in', ['Approved', 'Upcoming'])
+          .get();
+
+      const doctorAppointments = [];
+      for (const doc of querySnapshot.docs) {
+          const appointmentData = doc.data();
+          const patientId = appointmentData.patientId;
+
+          try {
+              const patientRef = db.collection('patients').doc(patientId);
+              const patientSnapshot = await patientRef.get();
+              const patientData = patientSnapshot.data();
+              appointmentData.patientName = patientData ? patientData.name : 'Unknown Patient';
+          } catch (error) {
+              console.error('Error fetching patient name:', error);
+              appointmentData.patientName = 'Patient Info Unavailable'; // Handle potential errors
+          }
+
+          doctorAppointments.push({ id: doc.id, ...appointmentData });
+      }
+
+      res.json(doctorAppointments);
+
+  } catch (error) {
+      console.error('Error fetching confirmed/upcoming appointments for doctor:', error);
+      res.status(500).json({ error: 'Failed to fetch confirmed/upcoming appointments' });
+  }
+});
+
+// --- Get Consultation History for a Doctor ---
+app.get('/api/doctors/:doctorId/history', async (req, res) => {
+    try {
+        const doctorId = req.params.doctorId;
+
+        if (!doctorId) {
+            return res.status(400).json({ error: 'Doctor ID is required' });
+        }
+
+        const historyRef = db.collection('appointments');
+        const querySnapshot = await historyRef
+            .where('doctorId', '==', doctorId)
+            .where('status', 'in', ['Completed', 'Concluded']) // Adjust these statuses as needed
+            .orderBy('createdAt', 'desc') // Order by creation date, newest first
+            .get();
+
+        const consultationHistory = [];
+        for (const doc of querySnapshot.docs) {
+            const appointmentData = doc.data();
+            const patientId = appointmentData.patientId;
+
+            try {
+                const patientRef = db.collection('patients').doc(patientId);
+                const patientSnapshot = await patientRef.get();
+                const patientData = patientSnapshot.data();
+                consultationHistory.push({ id: doc.id, ...appointmentData, patientName: patientData ? patientData.name : 'Unknown Patient' });
+            } catch (error) {
+                console.error('Error fetching patient name for history:', error);
+                consultationHistory.push({ id: doc.id, ...appointmentData, patientName: 'Patient Info Unavailable' });
+            }
+        }
+
+        res.json(consultationHistory);
+
+    } catch (error) {
+        console.error('Error fetching consultation history:', error);
+        res.status(500).json({ error: 'Failed to fetch consultation history' });
+    }
+});
+
+
 
 // --- Start the server ---
 app.listen(port, () => {
